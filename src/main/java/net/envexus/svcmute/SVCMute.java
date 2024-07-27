@@ -1,6 +1,7 @@
 package net.envexus.svcmute;
 
 import de.maxhenkel.voicechat.api.BukkitVoicechatService;
+import net.envexus.svcmute.configuration.ConfigurationManager;
 import net.envexus.svcmute.integrations.IntegrationManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,11 +16,12 @@ public final class SVCMute extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        ConfigurationManager messageManager = new ConfigurationManager(this);
         IntegrationManager integrationManager = new IntegrationManager();
 
         BukkitVoicechatService service = getServer().getServicesManager().load(BukkitVoicechatService.class);
         if (service != null) {
-            voicechatPlugin = new MuteCheckPlugin(integrationManager);
+            voicechatPlugin = new MuteCheckPlugin(integrationManager, messageManager);
             service.registerPlugin(voicechatPlugin);
             LOGGER.info("Successfully registered voice chat mutecheck plugin");
         } else {

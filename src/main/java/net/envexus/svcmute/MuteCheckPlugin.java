@@ -4,6 +4,7 @@ import de.maxhenkel.voicechat.api.VoicechatApi;
 import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
+import net.envexus.svcmute.configuration.ConfigurationManager;
 import net.envexus.svcmute.integrations.IntegrationManager;
 import org.bukkit.entity.Player;
 
@@ -15,10 +16,12 @@ public class MuteCheckPlugin implements VoicechatPlugin {
 
     private final Set<UUID> notifiedPlayers;
     private final IntegrationManager integrationManager;
+    private final ConfigurationManager configurationManager;
 
-    public MuteCheckPlugin(IntegrationManager integrationManager) {
+    public MuteCheckPlugin(IntegrationManager integrationManager, ConfigurationManager messagesManager) {
         this.notifiedPlayers = new HashSet<>();
         this.integrationManager = integrationManager;
+        this.configurationManager = messagesManager;
     }
 
     /**
@@ -66,8 +69,12 @@ public class MuteCheckPlugin implements VoicechatPlugin {
         if (integrationManager.isPlayerMuted(player)) {
             event.cancel();
 
-            if (!notifiedPlayers.contains(player.getUniqueId())) {
-                player.sendMessage("You are muted and cannot use voice chat.");
+            if (configurationManager.getConfig().getBoolean("actionbar", false)) {
+                player.sendActionBar(configurationManager.getLocaleString("actionbar.muted"));
+            }
+
+            if (configurationManager.getConfig().getBoolean("message", false) && !notifiedPlayers.contains(player.getUniqueId())) {
+                player.sendMessage(configurationManager.getLocaleString("messages.muted"));
                 notifiedPlayers.add(player.getUniqueId());
             }
         } else {
