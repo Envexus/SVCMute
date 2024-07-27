@@ -1,0 +1,5 @@
+# IDE configurations
+.idea/
+
+# Build outputs
+target/
