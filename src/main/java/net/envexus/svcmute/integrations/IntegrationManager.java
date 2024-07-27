@@ -1,5 +1,6 @@
 package net.envexus.svcmute.integrations;
 
+import net.envexus.svcmute.integrations.advancedbans.AdvancedBansMuteChecker;
 import net.envexus.svcmute.integrations.essentials.EssentialsMuteChecker;
 import net.envexus.svcmute.integrations.litebans.LiteBansMuteChecker;
 import org.bukkit.Bukkit;
@@ -28,6 +29,11 @@ public class IntegrationManager {
         Plugin liteBansPlugin = Bukkit.getPluginManager().getPlugin("LiteBans");
         if (liteBansPlugin != null && liteBansPlugin.isEnabled()) {
             muteCheckers.add(new LiteBansMuteChecker());
+        }
+
+        Plugin advancedBansPlugin = Bukkit.getPluginManager().getPlugin("AdvancedBan");
+        if (advancedBansPlugin != null && advancedBansPlugin.isEnabled()) {
+            muteCheckers.add(new AdvancedBansMuteChecker(advancedBansPlugin));
         }
     }
 
