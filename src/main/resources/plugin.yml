@@ -2,6 +2,8 @@ name: SVCMute
 version: '${project.version}'
 main: net.envexus.svcmute.SVCMute
 api-version: '1.20'
-depend:
+softdepend:
+  - Essentials
   - LiteBans
+depend:
   - voicechat
