@@ -67,6 +67,10 @@
 
     <repositories>
         <repository>
+            <id>EssentialsX-releases</id>
+            <url>https://repo.essentialsx.net/releases</url>
+        </repository>
+        <repository>
             <id>henkelmax.public</id>
             <url>https://maven.maxhenkel.de/repository/public</url>
         </repository>
@@ -105,6 +109,12 @@
             <groupId>de.maxhenkel.voicechat</groupId>
             <artifactId>voicechat-api</artifactId>
             <version>2.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.essentialsx</groupId>
+            <artifactId>EssentialsX</artifactId>
+            <version>2.20.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

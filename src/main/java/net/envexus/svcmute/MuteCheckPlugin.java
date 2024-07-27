@@ -4,8 +4,8 @@ import de.maxhenkel.voicechat.api.VoicechatApi;
 import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
+import net.envexus.svcmute.integrations.IntegrationManager;
 import org.bukkit.entity.Player;
-import litebans.api.Database;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +13,12 @@ import java.util.UUID;
 
 public class MuteCheckPlugin implements VoicechatPlugin {
 
-    private Set<UUID> notifiedPlayers;
+    private final Set<UUID> notifiedPlayers;
+    private final IntegrationManager integrationManager;
 
-    public MuteCheckPlugin() {
+    public MuteCheckPlugin(IntegrationManager integrationManager) {
         this.notifiedPlayers = new HashSet<>();
+        this.integrationManager = integrationManager;
     }
 
     /**
@@ -61,7 +63,7 @@ public class MuteCheckPlugin implements VoicechatPlugin {
             return;
         }
 
-        if (isPlayerMuted(player)) {
+        if (integrationManager.isPlayerMuted(player)) {
             event.cancel();
 
             if (!notifiedPlayers.contains(player.getUniqueId())) {
@@ -71,15 +73,5 @@ public class MuteCheckPlugin implements VoicechatPlugin {
         } else {
             notifiedPlayers.remove(player.getUniqueId());
         }
-    }
-
-    /**
-     * Check if the player is muted using LiteBans
-     *
-     * @param player the player to check
-     * @return true if the player is muted, false otherwise
-     */
-    private boolean isPlayerMuted(Player player) {
-        return Database.get().isPlayerMuted(player.getUniqueId(), null);
     }
 }
