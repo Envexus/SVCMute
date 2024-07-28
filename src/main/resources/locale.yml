@@ -1,0 +1,7 @@
+prefix: <gray>[<red>SVCMute<gray>] <white>
+
+actionbar:
+  muted: "<red>You are muted and cannot use voice chat."
+
+messages:
+  muted: "<prefix><red>You are muted and cannot use voice chat."
