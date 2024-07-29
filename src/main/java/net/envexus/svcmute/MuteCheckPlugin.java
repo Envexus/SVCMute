@@ -39,7 +39,7 @@ public class MuteCheckPlugin implements VoicechatPlugin {
      */
     @Override
     public void initialize(VoicechatApi api) {
-
+        // Initialization logic if needed
     }
 
     /**
@@ -58,7 +58,6 @@ public class MuteCheckPlugin implements VoicechatPlugin {
      * @param event the microphone packet event
      */
     private void onMicrophone(MicrophonePacketEvent event) {
-
         if (event.getSenderConnection() == null) {
             return;
         }
