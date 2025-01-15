@@ -27,16 +27,19 @@ public class SCVUnmuteCommand extends BaseCommand {
     @Syntax("<player>")
     @Description("Unmute a player from voice chat.")
     public void onUnmute(CommandSender sender, String playerName) {
+        
         Player player = Bukkit.getPlayer(playerName);
         if (player == null) {
             sender.sendMessage("Player not found.");
             return;
-        } else if (!db.isMuted(player.getUniqueId().toString())) {
+        }
+
+        UUID playerUUID = player.getUniqueId();
+        if (!db.isMuted(playerUUID.toString())) {
             sender.sendMessage(playerName + " is not muted.");
             return;
         }
 
-        UUID playerUUID = player.getUniqueId();
         sender.sendMessage(playerName + " has been unmuted.");
         db.removeMute(playerUUID.toString());
         integrationManager.removeMutedPlayer(playerUUID);
