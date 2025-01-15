@@ -27,7 +27,7 @@ public class SCVUnmuteCommand extends BaseCommand {
     @Syntax("<player>")
     @Description("Unmute a player from voice chat.")
     public void onUnmute(CommandSender sender, String playerName) {
-        
+
         Player player = Bukkit.getPlayer(playerName);
         if (player == null) {
             sender.sendMessage("Player not found.");

@@ -6,6 +6,8 @@ import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import net.envexus.svcmute.configuration.ConfigurationManager;
 import net.envexus.svcmute.integrations.IntegrationManager;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -68,12 +70,18 @@ public class MuteCheckPlugin implements VoicechatPlugin {
         if (integrationManager.isPlayerMuted(player)) {
             event.cancel();
 
+            String remainingTime = integrationManager.getRemainingTime(player);
+
             if (configurationManager.getConfig().getBoolean("actionbar", false)) {
-                player.sendActionBar(configurationManager.getLocaleString("actionbar.muted"));
+                Component raw = configurationManager.getLocaleString("actionbar.muted");
+                Component actionBarMessage = raw.replaceText(TextReplacementConfig.builder().match("%remaining_time%").replacement(remainingTime).build());
+                player.sendActionBar(actionBarMessage);
             }
 
             if (configurationManager.getConfig().getBoolean("message", false) && !notifiedPlayers.contains(player.getUniqueId())) {
-                player.sendMessage(configurationManager.getLocaleString("messages.muted"));
+                Component raw = configurationManager.getLocaleString("actionbar.muted");
+                Component chatMessage = raw.replaceText(TextReplacementConfig.builder().match("%remaining_time%").replacement(remainingTime).build());
+                player.sendMessage(chatMessage);
                 notifiedPlayers.add(player.getUniqueId());
             }
         } else {
