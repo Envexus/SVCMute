@@ -15,6 +15,8 @@ In addition to compatibility with external plugins, SVCMute includes its own mut
 ### Commands
 - **/svcmute `<player>` `<time>`**  
   Mutes a player from using voice chat for a specified amount of time.
+- **/svcunmute `<player>`**  
+  Unmutes a player from using voice chat.
 
 ## Installation
 1. Download and install the SVCMute plugin on your server.
