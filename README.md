@@ -1,8 +1,5 @@
 # Welcome to SVCMute!
 
-> [!IMPORTANT]
-> This is a fork of the original SVCMute plugin by [Envexus](https://github.com/Envexus/SVCMute).
-
 ## Overview
 SVCMute is a plugin designed to enhance your server's moderation capabilities by integrating seamlessly with popular punishment plugins. It prevents players from using the voice chat feature when they are muted in these plugins.
 
