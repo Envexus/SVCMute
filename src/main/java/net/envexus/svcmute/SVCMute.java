@@ -2,6 +2,7 @@ package net.envexus.svcmute;
 
 import co.aikar.commands.BukkitCommandManager;
 import de.maxhenkel.voicechat.api.BukkitVoicechatService;
+import net.envexus.svcmute.commands.SCVUnmuteCommand;
 import net.envexus.svcmute.commands.SVCMuteCommand;
 import net.envexus.svcmute.configuration.ConfigurationManager;
 import net.envexus.svcmute.integrations.IntegrationManager;
@@ -44,6 +45,7 @@ public final class SVCMute extends JavaPlugin {
 
         // Register commands
         manager.registerCommand(new SVCMuteCommand(sqliteHelper, this, integrationManager));
+        manager.registerCommand(new SCVUnmuteCommand(sqliteHelper, integrationManager));
     }
 
     @Override

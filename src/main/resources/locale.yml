@@ -1,7 +1,7 @@
 prefix: <gray>[<red>SVCMute<gray>] <white>
 
 actionbar:
-  muted: "<red>You are muted and cannot use voice chat."
+  muted: "<red>You are muted and cannot use voice chat. (%remaining_time%)"
 
 messages:
-  muted: "<prefix><red>You are muted and cannot use voice chat."
+  muted: "<prefix><red>You are muted and cannot use voice chat. (%remaining_time%)"

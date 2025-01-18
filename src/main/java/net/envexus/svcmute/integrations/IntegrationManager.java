@@ -93,6 +93,35 @@ public class IntegrationManager {
         mutedPlayers.removeIf(mutedPlayer -> mutedPlayer.getPlayerUUID().equals(playerUUID));
     }
 
+    public String getRemainingTime(Player player) {
+        UUID playerUUID = player.getUniqueId();
+        Long storedUnmuteTime = sqliteHelper.getUnmuteTime(playerUUID.toString());
+        if (storedUnmuteTime != null) {
+            long remainingTime = storedUnmuteTime - System.currentTimeMillis();
+            if (remainingTime > 0) {
+                return formatTime(remainingTime);
+            }
+        }
+        return null;
+    }
+
+    private String formatTime(long remainingTime) {
+        long seconds = remainingTime / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long days = hours / 24;
+
+        if (days > 0) {
+            return days + "d " + hours % 24 + "h";
+        } else if (hours > 0) {
+            return hours + "h " + minutes % 60 + "m";
+        } else if (minutes > 0) {
+            return minutes + "m " + seconds % 60 + "s";
+        } else {
+            return seconds + "s";
+        }
+    }
+
     // Inner class to represent a muted player
     private static class MutedPlayer {
         private final UUID playerUUID;

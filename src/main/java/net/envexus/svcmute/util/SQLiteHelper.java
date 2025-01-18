@@ -71,4 +71,17 @@ public class SQLiteHelper {
             e.printStackTrace();
         }
     }
+
+    public boolean isMuted(String string) {
+        String sql = "SELECT * FROM mutes WHERE uuid = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, string);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
