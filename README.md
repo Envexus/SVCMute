@@ -25,7 +25,3 @@ In addition to compatibility with external plugins, SVCMute includes its own mut
 
 ## Configuration
 For detailed configuration options, refer to the `config.yml` file included with the plugin. Adjust settings to suit your server's needs.
-
-## Support
-For support and additional information, please visit the [Simple Scripts](https://discord.gg/F54c7Gw59p) Discord.<br>
-If you encounter Issues or Bugs, please report them on the [GitHub Issues](https://github.com/sluhtie/SVCMute/issues) page.
