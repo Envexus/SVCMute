@@ -6,12 +6,14 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Syntax;
+import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
 import net.envexus.svcmute.SVCMute;
 import net.envexus.svcmute.integrations.IntegrationManager;
 import net.envexus.svcmute.util.SQLiteHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import com.github.Anon8281.universalScheduler.UniversalScheduler;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -55,7 +57,7 @@ public class SVCMuteCommand extends BaseCommand {
         integrationManager.addMutedPlayer(playerUUID, unmuteTime);
 
         // Schedule unmute task
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        UniversalScheduler.getScheduler(this.plugin).runTaskLater(() -> {
             Long storedUnmuteTime = db.getUnmuteTime(playerUUID.toString());
             if (storedUnmuteTime != null && storedUnmuteTime <= System.currentTimeMillis()) {
                 db.removeMute(playerUUID.toString());
