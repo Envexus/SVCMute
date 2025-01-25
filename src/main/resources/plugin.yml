@@ -2,6 +2,7 @@ name: SVCMute
 version: '2.0'
 main: net.envexus.svcmute.SVCMute
 api-version: '1.20'
+folia-supported: true
 softdepend:
   - Essentials
   - LiteBans
