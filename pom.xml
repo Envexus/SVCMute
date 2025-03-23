@@ -32,8 +32,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.5.0</version>
                 <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>com.github.Anon8281:UniversalScheduler</include>
+                            <include>co.aikar:acf-bukkit</include>
+                        </includes>
+                    </artifactSet>
                     <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
                     <relocations>
                         <relocation>
@@ -43,6 +49,10 @@
                         <relocation>
                             <pattern>co.aikar.locales</pattern>
                             <shadedPattern>net.envexus.locales</shadedPattern> <!-- Replace this -->
+                        </relocation>
+                        <relocation>
+                            <pattern>com.github.Anon8281.universalScheduler</pattern>
+                            <shadedPattern>net.envexus.universalScheduler</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -60,16 +70,16 @@
 
     <repositories>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
             <id>EssentialsX-releases</id>
             <url>https://repo.essentialsx.net/releases</url>
         </repository>
         <repository>
             <id>henkelmax.public</id>
             <url>https://maven.maxhenkel.de/repository/public</url>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
         </repository>
         <repository>
             <id>Modrinth</id>
@@ -116,16 +126,22 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.github.Anon8281</groupId>
+            <artifactId>UniversalScheduler</artifactId>
+            <version>0.1.6</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.DevLeoko</groupId>
             <artifactId>AdvancedBan</artifactId>
             <version>v2.3.0</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>co.aikar</groupId>
             <artifactId>acf-bukkit</artifactId>
             <version>0.5.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
