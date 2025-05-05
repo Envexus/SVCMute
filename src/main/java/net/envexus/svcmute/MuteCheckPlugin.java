@@ -72,6 +72,10 @@ public class MuteCheckPlugin implements VoicechatPlugin {
 
             String remainingTime = integrationManager.getRemainingTime(player);
 
+            if (remainingTime == null) {
+                remainingTime = "Unknown";
+            }
+
             if (configurationManager.getConfig().getBoolean("actionbar", false)) {
                 Component raw = configurationManager.getLocaleString("actionbar.muted");
                 Component actionBarMessage = raw.replaceText(TextReplacementConfig.builder().match("%remaining_time%").replacement(remainingTime).build());
@@ -88,4 +92,5 @@ public class MuteCheckPlugin implements VoicechatPlugin {
             notifiedPlayers.remove(player.getUniqueId());
         }
     }
+
 }
