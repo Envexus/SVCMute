@@ -103,24 +103,34 @@ public class IntegrationManager {
         mutedPlayers.removeIf(mutedPlayer -> mutedPlayer.getPlayerUUID().equals(playerUUID));
     }
 
-    public String getRemainingTime(Player player) {
+    public long getRemainingMilliseconds(Player player) {
         var maxMuteTimestamp = muteCheckers.stream()
                 .mapToLong(checker -> checker.getUnmuteTime(player))
                 .max();
 
         if (maxMuteTimestamp.isEmpty()) {
-            return null;
+            return -1;
         }
 
         var storedUnmuteTime = maxMuteTimestamp.getAsLong();
         if (storedUnmuteTime != -1) {
             long remainingTime = storedUnmuteTime - System.currentTimeMillis();
-            if (remainingTime > 0) {
-                return formatTime(remainingTime);
+            if (remainingTime >= 0) {
+                return remainingTime;
             }
         }
 
-        return null;
+        return -1;
+    }
+
+    public String getRemainingTime(Player player) {
+        var ms = getRemainingMilliseconds(player);
+
+        if (ms < 0) {
+            return "0s";
+        }
+
+        return formatTime(ms);
     }
 
     private String formatTime(long remainingTime) {
