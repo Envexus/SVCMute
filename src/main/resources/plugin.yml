@@ -8,5 +8,6 @@ softdepend:
   - LiteBans
   - AdvancedBan
   - AdvancedBanX
+  - PlaceholderAPI
 depend:
   - voicechat
