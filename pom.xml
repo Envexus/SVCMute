@@ -97,6 +97,10 @@
             <id>aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
+        <repository>
+            <id>hnt8</id>
+            <url>https://java.hnt8.net</url>
+        </repository>
 
     </repositories>
 
@@ -142,6 +146,12 @@
             <artifactId>acf-bukkit</artifactId>
             <version>0.5.1-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.hnt8.advancedban</groupId>
+            <artifactId>AdvancedBanX</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

@@ -1,6 +1,8 @@
 package net.envexus.svcmute.integrations;
 
+import net.envexus.svcmute.SVCMute;
 import net.envexus.svcmute.integrations.advancedbans.AdvancedBansMuteChecker;
+import net.envexus.svcmute.integrations.advancedbanx.AdvancedBanXMuteChecker;
 import net.envexus.svcmute.integrations.essentials.EssentialsMuteChecker;
 import net.envexus.svcmute.integrations.litebans.LiteBansMuteChecker;
 import net.envexus.svcmute.integrations.svcmute.SQLiteMuteChecker;
@@ -33,10 +35,14 @@ public class IntegrationManager {
         Plugin advancedBansPlugin = Bukkit.getPluginManager().getPlugin("AdvancedBan");
         boolean isAdvancedBanEnabled = advancedBansPlugin != null && advancedBansPlugin.isEnabled();
 
-        if (!isLiteBansEnabled && !isAdvancedBanEnabled) {
+        Plugin advancedBanXPlugin = Bukkit.getPluginManager().getPlugin("AdvancedBanX");
+        boolean isAdvancedBanXEnabled = advancedBanXPlugin != null && advancedBanXPlugin.isEnabled();
+
+        if (!isLiteBansEnabled && !isAdvancedBanEnabled && !isAdvancedBanXEnabled) {
             Plugin essentialsPlugin = Bukkit.getPluginManager().getPlugin("Essentials");
             if (essentialsPlugin != null && essentialsPlugin.isEnabled()) {
                 muteCheckers.add(new EssentialsMuteChecker(essentialsPlugin));
+                SVCMute.LOGGER.info("Adding Essentials Mute Checker");
             }
         }
 
@@ -46,6 +52,10 @@ public class IntegrationManager {
 
         if (isAdvancedBanEnabled) {
             muteCheckers.add(new AdvancedBansMuteChecker(advancedBansPlugin));
+        }
+
+        if (isAdvancedBanXEnabled) {
+            muteCheckers.add(new AdvancedBanXMuteChecker(advancedBanXPlugin));
         }
 
         muteCheckers.add(new SQLiteMuteChecker(sqliteHelper));
