@@ -7,5 +7,7 @@ softdepend:
   - Essentials
   - LiteBans
   - AdvancedBan
+  - AdvancedBanX
+  - PlaceholderAPI
 depend:
   - voicechat
