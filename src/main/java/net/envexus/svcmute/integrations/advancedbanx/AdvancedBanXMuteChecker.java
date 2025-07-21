@@ -8,16 +8,30 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 public class AdvancedBanXMuteChecker implements MuteChecker {
+    private final UUIDManager uuidManager;
     private final PunishmentManager punishmentManager;
 
     public AdvancedBanXMuteChecker(Plugin plugin) {
         this.punishmentManager = PunishmentManager.get();
+        this.uuidManager = UUIDManager.get();
     }
 
     @Override
     public boolean isPlayerMuted(Player player) {
-        String uuid = UUIDManager.get().getUUID(player.getName());
+        String uuid = uuidManager.getUUID(player.getName());
         Punishment punishment = punishmentManager.getMute(uuid);
         return punishment != null;
+    }
+
+    @Override
+    public long getUnmuteTime(Player player) {
+        String uuid = uuidManager.getUUID(player.getName());
+        Punishment punishment = punishmentManager.getMute(uuid);
+
+        if (punishment == null) {
+            return -1;
+        }
+
+        return punishment.getEnd();
     }
 }

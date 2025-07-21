@@ -104,14 +104,22 @@ public class IntegrationManager {
     }
 
     public String getRemainingTime(Player player) {
-        UUID playerUUID = player.getUniqueId();
-        Long storedUnmuteTime = sqliteHelper.getUnmuteTime(playerUUID.toString());
-        if (storedUnmuteTime != null) {
+        var maxMuteTimestamp = muteCheckers.stream()
+                .mapToLong(checker -> checker.getUnmuteTime(player))
+                .max();
+
+        if (maxMuteTimestamp.isEmpty()) {
+            return null;
+        }
+
+        var storedUnmuteTime = maxMuteTimestamp.getAsLong();
+        if (storedUnmuteTime != -1) {
             long remainingTime = storedUnmuteTime - System.currentTimeMillis();
             if (remainingTime > 0) {
                 return formatTime(remainingTime);
             }
         }
+
         return null;
     }
 
