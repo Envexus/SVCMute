@@ -18,4 +18,15 @@ public class EssentialsMuteChecker implements MuteChecker {
         User user = essentials.getUser(player);
         return user != null && user.isMuted();
     }
+
+    @Override
+    public long getUnmuteTime(Player player) {
+        User user = essentials.getUser(player);
+
+        if (user == null) {
+            return -1;
+        }
+
+        return user.getMuteTimeout();
+    }
 }

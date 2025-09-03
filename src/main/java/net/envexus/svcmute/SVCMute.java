@@ -6,6 +6,7 @@ import net.envexus.svcmute.commands.SCVUnmuteCommand;
 import net.envexus.svcmute.commands.SVCMuteCommand;
 import net.envexus.svcmute.configuration.ConfigurationManager;
 import net.envexus.svcmute.integrations.IntegrationManager;
+import net.envexus.svcmute.placeholders.SVCMutePlaceholderExpansion;
 import net.envexus.svcmute.util.SQLiteHelper;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,6 +39,10 @@ public final class SVCMute extends JavaPlugin {
             LOGGER.info("Successfully registered voice chat mutecheck plugin");
         } else {
             LOGGER.info("Failed to register voice chat mutecheck plugin");
+        }
+
+        if (this.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            new SVCMutePlaceholderExpansion(integrationManager).register();
         }
 
         // Initialize ACF Command Manager
