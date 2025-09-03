@@ -8,6 +8,7 @@ SVCMute supports the following punishment plugins:
 - **LiteBans**
 - **AdvancedBan**
 - **EssentialsX**
+- **AdvancedBanX**
 
 ## In-Built Mute System
 In addition to compatibility with external plugins, SVCMute includes its own mute system. This allows you to mute players from using voice chat without affecting their in-game chat privileges.
