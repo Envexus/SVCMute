@@ -2,7 +2,6 @@ package net.envexus.svcmute.integrations;
 
 import net.envexus.svcmute.SVCMute;
 import net.envexus.svcmute.integrations.advancedbans.AdvancedBansMuteChecker;
-import net.envexus.svcmute.integrations.advancedbanx.AdvancedBanXMuteChecker;
 import net.envexus.svcmute.integrations.essentials.EssentialsMuteChecker;
 import net.envexus.svcmute.integrations.litebans.LiteBansMuteChecker;
 import net.envexus.svcmute.integrations.svcmute.SQLiteMuteChecker;
@@ -54,9 +53,6 @@ public class IntegrationManager {
             muteCheckers.add(new AdvancedBansMuteChecker(advancedBansPlugin));
         }
 
-        if (isAdvancedBanXEnabled) {
-            muteCheckers.add(new AdvancedBanXMuteChecker(advancedBanXPlugin));
-        }
 
         muteCheckers.add(new SQLiteMuteChecker(sqliteHelper));
     }
